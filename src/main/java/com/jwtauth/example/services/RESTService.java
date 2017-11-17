@@ -81,7 +81,14 @@ public class RESTService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response protectedResource(@HeaderParam("authorization") String token) {
         User user = validateToken(token);
-        return Response.ok().entity(user).build();
+        if(user != null) {
+            user.setPassword(null);
+            return Response.ok().entity(user).build();
+        } else {
+            ResponsePojo responsePojo = new ResponsePojo();
+            responsePojo.setError("Invalid token.");
+            return Response.ok().entity(responsePojo).build();
+        }
     }
 
 

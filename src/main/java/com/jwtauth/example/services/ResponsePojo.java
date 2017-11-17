@@ -10,10 +10,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ResponsePojo {
 
-    @XmlElement()
+    @XmlElement
     private String token;
 
-    @XmlElement()
+    @XmlElement
     private String error;
 
 }
