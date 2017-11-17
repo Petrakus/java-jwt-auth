@@ -4,7 +4,7 @@ Java authentication and authorization with JwtToken example using Maven, Jersey,
 ## Getting started
 First you need to have Maven installed then import the project as Maven project
 ## Endpoints
-### /jwtauth/api/register - User registration. Method: POST
+### /api/register - User registration. Method: POST
 Request:
 ```
 {
@@ -19,7 +19,7 @@ Response:
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YTBlYTJjZmIwNzc0ODIwNjA0MjZmMDUiLCJpYXQiOjE1MTA5MDg2MjMsImV4cCI6MTUxMDk5NTAyM30.X5XDB6_m1R9P87ErslknRs1qP6gVV815HyPLPRrKP8s"
 }
 ```
-### /jwtauth/api/login - User login. Method: POST
+### /api/login - User login. Method: POST
 Request:
 ```
 {
@@ -33,7 +33,7 @@ Response:
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YTBlYTJjZmIwNzc0ODIwNjA0MjZmMDUiLCJpYXQiOjE1MTA5MDg2MjMsImV4cCI6MTUxMDk5NTAyM30.X5XDB6_m1R9P87ErslknRs1qP6gVV815HyPLPRrKP8s"
 }
 ```
-### /jwtauth/api/me - User details. Method: GET
+### /api/me - User details. Method: GET
 Request:
 ```
 Header:
