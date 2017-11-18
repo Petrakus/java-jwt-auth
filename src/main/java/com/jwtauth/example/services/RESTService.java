@@ -11,6 +11,7 @@ import com.jwtauth.example.constants.Constants;
 import com.jwtauth.example.dao.UserDao;
 import com.jwtauth.example.model.User;
 import com.jwtauth.example.util.CypherUtils;
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -21,6 +22,8 @@ import java.util.Date;
 
 @Path("/")
 public class RESTService {
+
+    private final Logger LOGGER = Logger.getLogger(RESTService.class);
 
     @POST
     @Path("/register")
@@ -104,7 +107,7 @@ public class RESTService {
                     .withIssuer("jwtauth")
                     .sign(algorithm);
         } catch (UnsupportedEncodingException | JWTCreationException e) {
-            System.err.println(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
         }
         return null;
     }
@@ -124,7 +127,7 @@ public class RESTService {
             UserDao userDao = new UserDao();
             return userDao.findUserById(userId.asLong());
         } catch (UnsupportedEncodingException | JWTVerificationException e){
-            System.err.println(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
         }
         return null;
     }

@@ -1,11 +1,15 @@
 package com.jwtauth.example.util;
 
 
+import org.apache.log4j.Logger;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class CypherUtils {
+
+    private static final Logger LOGGER = Logger.getLogger(CypherUtils.class);
 
     public static String getSHA512SecurePassword(String passwordToHash) {
         String generatedPassword = null;
@@ -18,7 +22,7 @@ public class CypherUtils {
             }
             generatedPassword = sb.toString();
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            System.err.println(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
         }
         return generatedPassword;
     }
