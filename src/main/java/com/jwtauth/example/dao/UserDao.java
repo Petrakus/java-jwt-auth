@@ -29,11 +29,8 @@ public class UserDao {
 
     public User findUserByEmail(String email) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<User> criteria = builder.createQuery(User.class);
-            Root<User> root = criteria.from(User.class);
-            criteria.select(root).where(builder.equal(root.get("email"), email));
-            Query<User> q = session.createQuery(criteria);
+            Query<User> q = session.createQuery("from User where email = :email", User.class);
+            q.setParameter("email", email);
             return q.getSingleResult();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -43,11 +40,8 @@ public class UserDao {
 
     public User findUserById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<User> criteria = builder.createQuery(User.class);
-            Root<User> root = criteria.from(User.class);
-            criteria.select(root).where(builder.equal(root.get("id"), id));
-            Query<User> q = session.createQuery(criteria);
+            Query<User> q = session.createQuery("from User where id = :id", User.class);
+            q.setParameter("id", id);
             return q.getSingleResult();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
