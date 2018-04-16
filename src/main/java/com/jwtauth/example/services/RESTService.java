@@ -114,18 +114,20 @@ public class RESTService {
 
     private User validateToken(String token) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(Constants.JWT_TOKEN_KEY);
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("jwtauth")
-                    .build(); //Reusable verifier instance
-            DecodedJWT jwt = verifier.verify(token);
+            if(token != null) {
+                Algorithm algorithm = Algorithm.HMAC256(Constants.JWT_TOKEN_KEY);
+                JWTVerifier verifier = JWT.require(algorithm)
+                        .withIssuer("jwtauth")
+                        .build(); //Reusable verifier instance
+                DecodedJWT jwt = verifier.verify(token);
 
-            //Get the userId from token claim.
-            Claim userId = jwt.getClaim("userId");
+                //Get the userId from token claim.
+                Claim userId = jwt.getClaim("userId");
 
-            // Find user by token subject(id).
-            UserDao userDao = new UserDao();
-            return userDao.findUserById(userId.asLong());
+                // Find user by token subject(id).
+                UserDao userDao = new UserDao();
+                return userDao.findUserById(userId.asLong());
+            }
         } catch (UnsupportedEncodingException | JWTVerificationException e){
             LOGGER.error(e.getMessage(), e);
         }
