@@ -45,7 +45,7 @@ public class RESTService {
             return Response.status(422).entity(responsePojo).build();
         }
 
-        responsePojo.setToken(signToken(user));
+        responsePojo.setToken(generateToken(user));
 
         return Response.ok().entity(responsePojo).build();
     }
@@ -71,7 +71,7 @@ public class RESTService {
         }
 
         if (existingUser.getPassword().equals(CypherUtils.getSHA512SecurePassword(user.getPassword()))) {
-            responsePojo.setToken(signToken(existingUser));
+            responsePojo.setToken(generateToken(existingUser));
         } else {
             responsePojo.setError("Authentication failed.");
         }
@@ -95,7 +95,7 @@ public class RESTService {
     }
 
 
-    private String signToken(User user) {
+    private String generateToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(Constants.JWT_TOKEN_KEY);
             Date expirationDate = Date.from(ZonedDateTime.now().plusHours(24).toInstant());
