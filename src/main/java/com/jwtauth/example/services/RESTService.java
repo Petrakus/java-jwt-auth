@@ -101,11 +101,11 @@ public class RESTService {
             Date expirationDate = Date.from(ZonedDateTime.now().plusHours(24).toInstant());
             Date issuedAt = Date.from(ZonedDateTime.now().toInstant());
             return JWT.create()
-                    .withIssuedAt(issuedAt)
-                    .withExpiresAt(expirationDate)
-                    .withClaim("userId", user.getId())
-                    .withIssuer("jwtauth")
-                    .sign(algorithm);
+                    .withIssuedAt(issuedAt) // Issue date.
+                    .withExpiresAt(expirationDate) // Expiration date.
+                    .withClaim("userId", user.getId()) // User id - here we can put anything we want, but for the example userId is appropriate.
+                    .withIssuer("jwtauth") // Issuer of the token.
+                    .sign(algorithm); // And the signing algorithm.
         } catch (UnsupportedEncodingException | JWTCreationException e) {
             LOGGER.error(e.getMessage(), e);
         }
